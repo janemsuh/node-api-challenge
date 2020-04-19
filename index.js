@@ -12,3 +12,25 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Go code!
 */
+
+const express = require('express');
+const server = express();
+const port = 5000;
+
+const projectRouter = require('./routers/projectRouter');
+const actionRouter = require('./routers/actionRouter');
+
+server.use(express.json());
+
+server.get('/', (req, res) => {
+    res.json({
+        message: 'Welcome to the Node API sprint challenge API!'
+    });
+});
+
+server.use('/projects', projectRouter);
+server.use('/actions', actionRouter);
+
+server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
